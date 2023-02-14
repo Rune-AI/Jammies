@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BoatMovement : MonoBehaviour
 {
@@ -13,14 +14,18 @@ public class BoatMovement : MonoBehaviour
 
     private bool endGame;
 
+    private Vector2 movementInput;
+
     private void Start()
     {
         float closestDistance = float.MaxValue;
 
         foreach (RiverNode riverNode in FindObjectsOfType<RiverNode>())
         {
-            if (Vector3.Distance(transform.position, riverNode.transform.position) < closestDistance)
+            float distance = Vector3.Distance(transform.position, riverNode.transform.position);
+            if (distance < closestDistance)
             {
+                closestDistance = distance;
                 currentNode = riverNode;
             }
         }
@@ -70,26 +75,26 @@ public class BoatMovement : MonoBehaviour
         float horizontalForce = Mathf.Lerp(currentNode.HorizontalCurrent, nextNode.HorizontalCurrent, t);
         float verticalForce = Mathf.Lerp(currentNode.VerticalCurrent, nextNode.VerticalCurrent, t);
 
-        Vector3 riverForce = currentToNextNode * verticalForce;
+        
         Vector3 perpendicular = new Vector3(currentToNextNode.z, 0, -currentToNextNode.x);
         perpendicular.Normalize();
 
-        riverForce += perpendicular * horizontalForce;
+        Vector3 horizontalVelocity = perpendicular * horizontalForce + perpendicular * movementInput.x * moveSpeed;
 
         //normal movement
-        transform.position += moveSpeed * Time.deltaTime * currentToNextNode;
+        transform.position += (moveSpeed + verticalForce) * Time.deltaTime * currentToNextNode;
 
         //river current
         Vector3 posBetweenNodes = Vector3.Lerp(currentNode.transform.position, nextNode.transform.position, t);
         if (((Vector3.Cross((ownPos - currentNode.transform.position), currentToNextNode).y > 0 && horizontalForce > 0)
             || (Vector3.Cross((ownPos - currentNode.transform.position), currentToNextNode).y < 0 && horizontalForce < 0))
-            || Vector3.Distance((ownPos + riverForce * Time.deltaTime), posBetweenNodes) < riverWidth / 2)
+            || Vector3.Distance((ownPos + horizontalVelocity * Time.deltaTime), posBetweenNodes) < riverWidth / 2)
         {
-            transform.position += riverForce * Time.deltaTime;
+            transform.position += horizontalVelocity * Time.deltaTime;
         }
         else
         {
-            transform.position -= riverForce * Time.deltaTime;
+            transform.position -= horizontalVelocity * Time.deltaTime;
         }
 
         Quaternion neededRotation = Quaternion.LookRotation(nextNode.transform.position - currentNode.transform.position);
@@ -110,9 +115,14 @@ public class BoatMovement : MonoBehaviour
         //Debug.Log("verticalForce: " + verticalForce);
     }
 
+    public void OnMove(InputValue value)
+    {
+        movementInput = value.Get<Vector2>();
+    }
+
 
     //https://answers.unity.com/questions/1271974/inverselerp-for-vector3.html
-    public float VectorInverseLerp(Vector3 a, Vector3 b, Vector3 value)
+    float VectorInverseLerp(Vector3 a, Vector3 b, Vector3 value)
     {
         Vector3 AB = b - a;
         Vector3 AV = value - a;
