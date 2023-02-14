@@ -73,7 +73,19 @@ public class BoatMovement : MonoBehaviour
                 return;
             }
 
-            nextNode = currentNode.NextNodes[0];
+            float closestDistance = float.MaxValue;
+            foreach (RiverNode riverNode in currentNode.NextNodes) 
+            {
+                Vector3 direction = riverNode.transform.position - currentNode.transform.position;
+                direction.Normalize();
+
+                float distance = Vector3.Distance((currentNode.transform.position + direction), ownPos);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    nextNode = riverNode;
+                }                
+            }            
         }
 
 
@@ -116,8 +128,8 @@ public class BoatMovement : MonoBehaviour
 
         //Debug.Log("t: " + t);
         //Debug.Log("river width: " + riverWidth);
-        Debug.Log("horizontalForce: " + horizontalForce);
-        Debug.Log("posBetweenNodes: " + posBetweenNodes);
+        //Debug.Log("horizontalForce: " + horizontalForce);
+        //Debug.Log("posBetweenNodes: " + posBetweenNodes);
         //Debug.Log("verticalForce: " + verticalForce);
     }
 
