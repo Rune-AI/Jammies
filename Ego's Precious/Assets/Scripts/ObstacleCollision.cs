@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class ObstacleCollision : MonoBehaviour
 {
+    public GameObject HolePrefab;
+    
+
+    private GameObject HolesParent;
+
+    private void Awake()
+    {
+        HolesParent = GameObject.Find("Holes");
+        if (HolesParent == null)
+        {
+            HolesParent = new GameObject("Holes");
+        }
+    }
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collision with " + collision.gameObject.name);
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white);
-        }
+
+        Quaternion rotation = Quaternion.LookRotation(collision.contacts[0].normal);
+        Vector3 position = collision.contacts[0].point;
+        GameObject hole = Instantiate(HolePrefab, position, rotation, HolesParent.transform);
     }
 }
