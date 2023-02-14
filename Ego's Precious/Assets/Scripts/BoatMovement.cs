@@ -36,6 +36,12 @@ public class BoatMovement : MonoBehaviour
         }
         else
         {
+            if(currentNode.NextNodes.Count == 0) 
+            {
+                Debug.LogError("closestnode doesn't have next node");
+                return;
+            }
+
             nextNode = currentNode.NextNodes[0];
             transform.position = currentNode.transform.position;
 
@@ -82,7 +88,7 @@ public class BoatMovement : MonoBehaviour
         Vector3 horizontalVelocity = perpendicular * horizontalForce + perpendicular * movementInput.x * moveSpeed;
 
         //normal movement
-        transform.position += (moveSpeed + verticalForce) * Time.deltaTime * currentToNextNode;
+        transform.Translate(((moveSpeed + verticalForce) * Time.deltaTime * currentToNextNode), Space.World);
 
         //river current
         Vector3 posBetweenNodes = Vector3.Lerp(currentNode.transform.position, nextNode.transform.position, t);
@@ -90,11 +96,11 @@ public class BoatMovement : MonoBehaviour
             || (Vector3.Cross((ownPos - currentNode.transform.position), currentToNextNode).y < 0 && horizontalForce < 0))
             || Vector3.Distance((ownPos + horizontalVelocity * Time.deltaTime), posBetweenNodes) < riverWidth / 2)
         {
-            transform.position += horizontalVelocity * Time.deltaTime;
+            transform.Translate((horizontalVelocity * Time.deltaTime), Space.World);
         }
-        else
+        else if (Vector3.Distance((ownPos + horizontalVelocity * Time.deltaTime), posBetweenNodes) > riverWidth / 2 + 0.1f) //too far so move back
         {
-            transform.position -= horizontalVelocity * Time.deltaTime;
+            transform.Translate((-horizontalVelocity * Time.deltaTime), Space.World);
         }
 
         Quaternion neededRotation = Quaternion.LookRotation(nextNode.transform.position - currentNode.transform.position);

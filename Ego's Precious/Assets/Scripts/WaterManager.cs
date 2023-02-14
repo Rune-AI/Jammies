@@ -16,7 +16,7 @@ public class WaterManager : MonoBehaviour
         Vector3[] vertices = meshFilter.mesh.vertices;
         for (int i = 0; i < vertices.Length; i++)
         {
-            vertices[i].y = WaveManager.instance.GetWaveHeight(transform.position.x + vertices[i].x);
+            vertices[i].y = WaveManager.instance.GetWaveHeight(transform.position.x + vertices[i].x * transform.localScale.x);
         }
 
         meshFilter.mesh.vertices = vertices;
