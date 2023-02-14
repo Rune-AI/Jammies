@@ -4,14 +4,37 @@ using UnityEngine;
 
 public class RiverNode : MonoBehaviour
 {
-    [SerializeField] private Vector2 riverForce;
-    [SerializeField] private Vector2 windForce;
+    [SerializeField] private float horizontalCurrent;
+    [SerializeField] private float verticalCurrent;
+    [SerializeField] private float riverWidth;
 
-    [SerializeField] private List<RiverNode> connections;
+    [SerializeField] private List<RiverNode> nextNodes;
 
-    public List<RiverNode> Connections
+    [SerializeField] private float rotationStart = 0.8f;
+
+    public List<RiverNode> NextNodes
     {
-        get { return Connections; }
+        get { return nextNodes; }
     }
-    
+
+    public float HorizontalCurrent
+    { 
+        get { return horizontalCurrent; } 
+    }
+
+    public float VerticalCurrent
+    {
+        get { return verticalCurrent; }
+    }
+
+    public float RiverWidth
+    {
+        get { return riverWidth; }
+    }
+
+    public float RotationStart
+    {
+        get { return rotationStart; }
+    }
+
 }
