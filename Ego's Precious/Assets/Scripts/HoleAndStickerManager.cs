@@ -68,7 +68,24 @@ public class HoleAndStickerManager : MonoBehaviour
             return false;
         }
     }
-    
+
+    public int GetActiveHoleCount()
+    {
+        {
+            int activeHoleCount = 0;
+            foreach (var hole in holes)
+            {
+                if (hole.activeSelf)
+                {
+                    activeHoleCount++;
+                }
+            }
+
+            return activeHoleCount;
+        }
+    }
+
+
     public void AddHole(GameObject hole)
     {
         holes.Add(hole);

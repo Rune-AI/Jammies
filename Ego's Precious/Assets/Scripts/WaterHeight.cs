@@ -25,7 +25,7 @@ public class WaterHeight : MonoBehaviour
         else if (instance != this)
         {
             Debug.Log("WaterManager Instance Already Exists, Destroying Object!");
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
