@@ -196,8 +196,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5889829106526949954}
-  - component: {fileID: 133875717175229910}
-  - component: {fileID: 3594459768175344814}
   - component: {fileID: 4133200765064687237}
   - component: {fileID: 1169155353}
   - component: {fileID: 2744944733257376596}
@@ -226,30 +224,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &133875717175229910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3525018466983166230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a17456bb374dbd1418f7904de64da302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3594459768175344814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3525018466983166230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f87e132c6365664fa77dc6637bdc946, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4133200765064687237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b6ff6a70b000e4c9d5f04d2e2d73d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visual: {fileID: 0}
   moveSpeed: 10
   rotationSpeed: 20
 --- !u!114 &1169155353
