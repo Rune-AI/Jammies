@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8489413769136206596
 Transform:
   m_ObjectHideFlags: 0
@@ -131,6 +131,4 @@ MonoBehaviour:
   horizontalCurrent: 0
   verticalCurrent: 0
   riverWidth: 20
-  nextNodes:
-  - {fileID: 0}
-  rotationStart: 0.8
+  nextNodes: []

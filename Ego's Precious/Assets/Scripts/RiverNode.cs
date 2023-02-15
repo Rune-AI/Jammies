@@ -10,7 +10,7 @@ public class RiverNode : MonoBehaviour
 
     [SerializeField] private List<RiverNode> nextNodes;
 
-    [SerializeField] private float rotationStart = 0.8f;
+    //[SerializeField] private float rotationStart = 0.8f;
 
     public List<RiverNode> NextNodes
     {
@@ -32,9 +32,9 @@ public class RiverNode : MonoBehaviour
         get { return riverWidth; }
     }
 
-    public float RotationStart
-    {
-        get { return rotationStart; }
-    }
+    //public float RotationStart
+    //{
+    //    get { return rotationStart; }
+    //}
 
 }

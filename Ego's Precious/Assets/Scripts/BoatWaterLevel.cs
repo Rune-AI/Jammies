@@ -9,7 +9,7 @@ public class BoatWaterLevel : MonoBehaviour
     [SerializeField] private float minDepthBeforeSubmerged = 1;
     [SerializeField] private float maxDepthBeforeSubmerged = 10;
 
-    [SerializeField] private int holeCount = 3;
+    [SerializeField] public int holeCount = 3;
 
     private float waterLevelPercentage;
 

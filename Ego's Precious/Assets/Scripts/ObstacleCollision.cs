@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class ObstacleCollision : MonoBehaviour
 {
@@ -21,7 +23,6 @@ public class ObstacleCollision : MonoBehaviour
             HolesParent.transform.parent = this.transform;
         }
 
-
         StickersParent = GameObject.Find("Stickers");
         if (StickersParent == null)
         {
@@ -29,22 +30,12 @@ public class ObstacleCollision : MonoBehaviour
             StickersParent.transform.parent = this.transform;
         }
     }
+    
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collision with " + collision.gameObject.name);
 
-        switch (collision.gameObject.tag)
-        {
-            case "Obstacle":
-                addPrefab(HolePrefab, collision.contacts[0].point, collision.contacts[0].normal, HolesParent);
-                break;
-            case "Sticker":
-                addPrefab(StickerPrefab, collision.contacts[0].point, collision.contacts[0].normal, StickersParent);
-                Destroy(collision.gameObject);
-                break;
-            default:
-                break;
-        }
+        DetectPrefab(collision.gameObject, collision.contacts[0].point, collision.contacts[0].normal);
     }
 
 
@@ -57,12 +48,12 @@ public class ObstacleCollision : MonoBehaviour
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(other.transform.position, direction, out hit, Mathf.Infinity))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, UnityEngine.Color.yellow);
             Debug.Log("Did Hit");
         }
         else
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, UnityEngine.Color.white);
             Debug.Log("Did not Hit");
         }
 
@@ -75,25 +66,35 @@ public class ObstacleCollision : MonoBehaviour
 
         Vector3 point = hit.point;
         Vector3 normal = -hit.normal;
-        
-        switch (other.gameObject.tag)
+
+        DetectPrefab(other.gameObject, point, normal);
+    }
+
+    private void DetectPrefab(GameObject other, Vector3 point, Vector3 normal)
+    {
+        switch (other.tag)
         {
             case "Obstacle":
-                addPrefab(HolePrefab, point, normal, HolesParent);
+                GameObject hole = addPrefab(HolePrefab, point, normal, HolesParent);
+                HoleAndStickerManager.instance.AddHole(hole);
                 break;
             case "Sticker":
-                addPrefab(StickerPrefab, point, normal, StickersParent);
-                Destroy(other.gameObject);
+                GameObject sticker = addPrefab(StickerPrefab, point, normal, StickersParent);
+                HoleAndStickerManager.instance.AddSticker(sticker);
+                Destroy(other);
                 break;
             default:
                 break;
         }
+        
     }
 
-    private void addPrefab(GameObject prefab, Vector3 point, Vector3 normal, GameObject parent)
+    private GameObject addPrefab(GameObject prefab, Vector3 point, Vector3 normal, GameObject parent)
     {
         Quaternion rotation = Quaternion.LookRotation(normal);
         Vector3 position = point;
-        GameObject hole = Instantiate(prefab, position, rotation, parent.transform);
+        GameObject item = Instantiate(prefab, position, rotation, parent.transform);
+
+        return item;
     }
 }
