@@ -10,7 +10,7 @@ public class StartScreenManager : MonoBehaviour
     
     public void OnStartGame(InputAction.CallbackContext context)
     {
-        Debug.Log("Start Game");
+        //Debug.Log("Start Game");
         //startScreen.SetActive(false);
         SceneManager.LoadScene("Game");
         
