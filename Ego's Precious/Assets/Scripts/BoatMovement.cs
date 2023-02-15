@@ -17,6 +17,7 @@ public class BoatMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float tiltedMoveSpeed = 10;
+    [SerializeField] private float sidePushSpeed = 2;
 
     private RiverNodeManager riverNodeManager;
 
@@ -218,7 +219,7 @@ public class BoatMovement : MonoBehaviour
         {
             Vector3 direction = posBetweenNodesProjected - ownPos;
             direction.Normalize();
-            transform.Translate((direction * 5 * Time.deltaTime), Space.World);
+            transform.Translate((direction * sidePushSpeed * Time.deltaTime), Space.World);
         }
 
         Quaternion neededRotation = Quaternion.LookRotation(GetPositionBetweenNodes(t + (1 - reachedNodeValue)) - posBetweenNodes);
