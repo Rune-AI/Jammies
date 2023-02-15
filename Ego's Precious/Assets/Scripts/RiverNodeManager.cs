@@ -27,6 +27,7 @@ public class RiverNodeManager : MonoBehaviour
     {
         foreach(RiverNode node in riverNodes)
         {
+            Gizmos.DrawSphere(node.transform.position, 0.5f);
             foreach(RiverNode nodeNeighbour in node.NextNodes)
             {
                 Vector3 currentToNextNode = nodeNeighbour.transform.position - node.transform.position;

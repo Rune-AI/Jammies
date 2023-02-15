@@ -4,7 +4,9 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 using UnityEngine.InputSystem;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using static UnityEngine.Rendering.DebugUI;
 
 public class BoatMovement : MonoBehaviour
@@ -14,12 +16,20 @@ public class BoatMovement : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float tiltedMoveSpeed = 10;
+    [SerializeField] private float sidePushSpeed = 2;
 
     private RiverNodeManager riverNodeManager;
 
     private List<RiverNode> riverNodes = Enumerable.Repeat<RiverNode>(null, 4).ToList(); //fill list with 4 empty nodes
 
-    private bool endGame;
+    private bool endGame = false;
+
+    public bool EndGame
+    {
+        get { return endGame; }
+        set { endGame = value; }
+    }
 
     private Vector2 movementInput;
 
@@ -64,7 +74,9 @@ public class BoatMovement : MonoBehaviour
             }
 
             riverNodes[2] = riverNodes[1].NextNodes[0];
-            transform.position = riverNodes[1].transform.position;
+            Vector3 position = riverNodes[1].transform.position;
+            position.y = transform.position.y;
+            transform.position = position;
 
             transform.rotation = Quaternion.LookRotation(riverNodes[2].transform.position - riverNodes[1].transform.position);
 
@@ -96,14 +108,25 @@ public class BoatMovement : MonoBehaviour
             return;
         }
 
-        if(transform.rotation.eulerAngles.z > 180)
+        movementInput.x = (transform.rotation.eulerAngles.z - 180) / 180;
+
+        if(movementInput.x > 0)
         {
-            movementInput.x = 0.5f;
+            movementInput.x = 1 - movementInput.x;
+            movementInput.x = Mathf.Sqrt(movementInput.x);
         }
-        else
+        else if(movementInput.x < 0)
         {
-            movementInput.x = -0.5f;
+            movementInput.x = -1 - movementInput.x;
+            movementInput.x = -Mathf.Sqrt(Mathf.Abs(movementInput.x));
         }
+
+        if (Mathf.Abs(movementInput.x) < 0.01f)
+        {
+            movementInput.x = 0;
+        }
+
+        movementInput.x *= tiltedMoveSpeed;
 
 
         Vector3 currentToNextNode = riverNodes[2].transform.position - riverNodes[1].transform.position;
@@ -112,7 +135,7 @@ public class BoatMovement : MonoBehaviour
         Vector3 ownPos = transform.position;
         ownPos.y = 0;       
 
-        float t = (Mathf.Clamp01(VectorInverseLerp(riverNodes[1].transform.position, riverNodes[2].transform.position, ownPos)));
+        float t = Mathf.Clamp01(VectorInverseLerp(riverNodes[1].transform.position, riverNodes[2].transform.position, ownPos));
         float reachedNodeValue = 0.99f;
         if (t >= reachedNodeValue)
         {
@@ -176,7 +199,7 @@ public class BoatMovement : MonoBehaviour
         Vector3 perpendicular = new Vector3(currentToNextNode.z, 0, -currentToNextNode.x);
         perpendicular.Normalize();
 
-        Vector3 horizontalVelocity = perpendicular * horizontalForce + perpendicular * movementInput.x * moveSpeed;
+        Vector3 horizontalVelocity = perpendicular * horizontalForce + perpendicular * movementInput.x;
 
         //normal movement
         transform.Translate(((moveSpeed + verticalForce) * Time.deltaTime * currentToNextNode), Space.World);
@@ -186,15 +209,17 @@ public class BoatMovement : MonoBehaviour
         Vector3 posBetweenNodesProjected = GetBezierPointProjectedOnPerpendicularRiverGraph(posBetweenNodes, perpendicular, Vector3.Lerp(riverNodes[1].transform.position, riverNodes[2].transform.position, t));
         //visualBezier.transform.position = posBetweenNodes;
         //visual.transform.position = Vector3.Lerp(riverNodes[1].transform.position, riverNodes[2].transform.position, t);
-        if (((Vector3.Cross((ownPos - riverNodes[1].transform.position), currentToNextNode).y > 0 && horizontalForce + movementInput.x * moveSpeed > 0)
-            || (Vector3.Cross((ownPos - riverNodes[1].transform.position), currentToNextNode).y < 0 && horizontalForce + movementInput.x * moveSpeed < 0))
+        if (((Vector3.Cross((ownPos - riverNodes[1].transform.position), currentToNextNode).y > 0 && horizontalForce + movementInput.x > 0)
+            || (Vector3.Cross((ownPos - riverNodes[1].transform.position), currentToNextNode).y < 0 && horizontalForce + movementInput.x < 0))
             || Vector3.Distance((ownPos + horizontalVelocity * Time.deltaTime), posBetweenNodesProjected) < riverWidth / 2)
         {
             transform.Translate((horizontalVelocity * Time.deltaTime), Space.World);
         }
         else if (Vector3.Distance((ownPos + horizontalVelocity * Time.deltaTime), posBetweenNodesProjected) > riverWidth / 2 + 0.1f) //too far so move back
         {
-            transform.Translate((-horizontalVelocity * Time.deltaTime), Space.World);
+            Vector3 direction = posBetweenNodesProjected - ownPos;
+            direction.Normalize();
+            transform.Translate((direction * sidePushSpeed * Time.deltaTime), Space.World);
         }
 
         Quaternion neededRotation = Quaternion.LookRotation(GetPositionBetweenNodes(t + (1 - reachedNodeValue)) - posBetweenNodes);
@@ -203,7 +228,10 @@ public class BoatMovement : MonoBehaviour
         //rotation.y = neededRotation.eulerAngles.y;
         //transform.eulerAngles = rotation;
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * rotationSpeed);
+        Vector3 eulers = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * rotationSpeed).eulerAngles;
+        eulers.x = transform.eulerAngles.x;
+        eulers.z = transform.eulerAngles.z;
+        transform.eulerAngles = eulers;
 
         //Debug.Log("t: " + t);
         //Debug.Log("river width: " + riverWidth);
@@ -256,14 +284,22 @@ public class BoatMovement : MonoBehaviour
     {
         Vector3 lineP1 = boatPosOnRiverGraph;
         Vector3 lineP2 = boatPosOnRiverGraph + perpendicularVector;
-
         return Vector3.Project((bezierPos - lineP1), (lineP2 - lineP1)) + lineP1;
     }
 
 
 
-    //https://answers.unity.com/questions/1271974/inverselerp-for-vector3.html
-    float VectorInverseLerp(Vector3 a, Vector3 b, Vector3 value)
+
+
+
+
+
+
+
+
+
+//https://answers.unity.com/questions/1271974/inverselerp-for-vector3.html
+float VectorInverseLerp(Vector3 a, Vector3 b, Vector3 value)
     {
         Vector3 AB = b - a;
         Vector3 AV = value - a;

@@ -4,6 +4,7 @@ using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.ProBuilder;
+using UnityEngine.Rendering.Universal;
 
 public class ObstacleCollision : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class ObstacleCollision : MonoBehaviour
 
     private GameObject HolesParent;
     private GameObject StickersParent;
+
+    [SerializeField] private List<Material> holeMaterials;
+    [SerializeField] private List<Material> stickerMaterials;
 
     private void Awake()
     {
@@ -76,10 +80,13 @@ public class ObstacleCollision : MonoBehaviour
         {
             case "Obstacle":
                 GameObject hole = addPrefab(HolePrefab, point, normal, HolesParent);
+                hole.GetComponent<DecalProjector>().material = GetRandomHoleMaterial();
                 HoleAndStickerManager.instance.AddHole(hole);
+                other.tag = "Untagged";
                 break;
             case "Sticker":
                 GameObject sticker = addPrefab(StickerPrefab, point, normal, StickersParent);
+                sticker.GetComponent<DecalProjector>().material = GetRandomStickerMaterial();
                 HoleAndStickerManager.instance.AddSticker(sticker);
                 Destroy(other);
                 break;
@@ -96,5 +103,17 @@ public class ObstacleCollision : MonoBehaviour
         GameObject item = Instantiate(prefab, position, rotation, parent.transform);
 
         return item;
+    }
+
+
+    private Material GetRandomHoleMaterial()
+    {
+        int randomIndex = Random.Range(0, holeMaterials.Count);
+        return holeMaterials[randomIndex];
+    }
+    private Material GetRandomStickerMaterial()
+    {
+        int randomIndex = Random.Range(0, stickerMaterials.Count);
+        return stickerMaterials[randomIndex];
     }
 }
