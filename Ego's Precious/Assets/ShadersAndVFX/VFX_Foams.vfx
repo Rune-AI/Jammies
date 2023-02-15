@@ -17,10 +17,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 77
+    x: 123
     y: -191
-    width: 1288
-    height: 1967
+    width: 1242
+    height: 1971
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1424,7 +1424,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614948}
   m_ExposedName: WindDirection
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 0
   m_Category: 
   m_Min:
     m_Type:
@@ -3484,7 +3484,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615035}
   m_ExposedName: SpawnXSize
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 1
   m_Category: 
   m_Min:
     m_Type:

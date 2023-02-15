@@ -9,7 +9,7 @@ public class BoatWaterLevel : MonoBehaviour
     [SerializeField] private float minDepthBeforeSubmerged = 1;
     [SerializeField] private float maxDepthBeforeSubmerged = 10;
 
-    [SerializeField] public int holeCount = 3;
+    [SerializeField] private int holeCount = 3;
 
     private float waterLevelPercentage;
 
@@ -27,6 +27,9 @@ public class BoatWaterLevel : MonoBehaviour
 
     private void Update()
     {
+
+        holeCount = HoleAndStickerManager.instance.GetActiveHoleCount();
+
         waterLevelPercentage += (holeCount - (waterLevelRisingTreshold - 1)) * Time.deltaTime * waterRiseSpeed;
 
         waterLevelPercentage = Mathf.Clamp01(waterLevelPercentage);
