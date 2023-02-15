@@ -11,32 +11,32 @@ public class Hole : MonoBehaviour
     void Awake()
     {
         waterEffect = GetComponent<VisualEffect>();
-        waterParticles = GetComponent<ParticleSystem>();
+        //waterParticles = GetComponent<ParticleSystem>();
 
         if (waterEffect == null)
         {
             Debug.Log("No Watereffect found");
         }
 
-        if (waterParticles == null)
-        {
-            Debug.Log("No WaterParticles found");
-        }
+        //if (waterParticles == null)
+        //{
+        //    Debug.Log("No WaterParticles found");
+        //}
     }
     
     // Update is called once per frame
-    void Update()
+    void Start()
     {
-        //Debug.Log(IsHoleUnderWater());
+        Debug.Log(IsHoleUnderWater());
         if (IsHoleUnderWater())
-        {
+        { 
             waterEffect.Play();
-            waterParticles.Play();
+            //waterParticles.Play();
         }
         else
         {
             waterEffect.Stop();
-            waterParticles.Stop();
+            //waterParticles.Stop();
         }
     }
 
@@ -45,6 +45,6 @@ public class Hole : MonoBehaviour
     {
         float WaterY = WaterHeight.instance.GetWaterHeight(new Vector2(transform.position.x, transform.position.z));
 
-        return transform.position.y < WaterY;
+        return transform.position.y < WaterY + 1.5f;
     }
 }
