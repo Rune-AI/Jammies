@@ -16,7 +16,7 @@ public class BoatFloater : MonoBehaviour
     private void FixedUpdate()
     {
         rigidBody.AddForceAtPosition(Physics.gravity / floaterCount, transform.position, ForceMode.Acceleration);
-        float waveHeight = WaveManager.instance.GetWaveHeight(transform.position.x);
+        float waveHeight = WaterHeight.instance.GetWaveHeight(new Vector2(transform.position.x, transform.position.z));
 
         if (transform.position.y < waveHeight)
         {
