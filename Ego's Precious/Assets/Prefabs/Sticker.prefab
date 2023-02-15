@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7864207396005443997}
-  - component: {fileID: 2838888162404293425}
+  - component: {fileID: 7785528989543481281}
   m_Layer: 0
   m_Name: Sticker
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2838888162404293425
+--- !u!114 &7785528989543481281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_DrawDistance: 1000
   m_FadeScale: 0.9
   m_StartAngleFade: 0
-  m_EndAngleFade: 0
+  m_EndAngleFade: 35.92826
   m_UVScale: {x: 1, y: 1}
   m_UVBias: {x: 0, y: 0}
   m_ScaleMode: 0
