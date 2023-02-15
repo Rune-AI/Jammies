@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 4301319724125072012}
   - component: {fileID: 4948313109510714616}
   m_Layer: 0
-  m_Name: Boat 2.0
+  m_Name: Boat 2.0 (unfinished)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
