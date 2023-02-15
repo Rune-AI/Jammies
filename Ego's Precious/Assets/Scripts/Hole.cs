@@ -17,20 +17,26 @@ public class Hole : MonoBehaviour
         {
             Debug.Log("No Watereffect found");
         }
+
+        if (waterParticles == null)
+        {
+            Debug.Log("No WaterParticles found");
+        }
     }
     
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(IsHoleUnderWater());
         if (IsHoleUnderWater())
         {
             waterEffect.Play();
-            waterParticles.Stop();
+            waterParticles.Play();
         }
         else
         {
             waterEffect.Stop();
-            waterParticles.Play();
+            waterParticles.Stop();
         }
     }
 
