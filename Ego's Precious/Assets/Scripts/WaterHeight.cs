@@ -41,7 +41,7 @@ public class WaterHeight : MonoBehaviour
 
     public float CalculateWaveHeight(Vector2 pos)
     {
-        float waveFrequency = water.GetFloat("_WaveFrequency");
+        float waveFrequency = water.GetFloat("_HeightFrequency");
         float twoPI = 6.28f;
         float waveSpeed = water.GetFloat("_WaveSpeed");
         float waveAmplitude = water.GetFloat("_WaveAmplitude");
