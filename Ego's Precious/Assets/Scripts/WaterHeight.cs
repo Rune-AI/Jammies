@@ -46,12 +46,12 @@ public class WaterHeight : MonoBehaviour
         float waveSpeed = water.GetFloat("_WaveSpeed");
         float waveAmplitude = water.GetFloat("_WaveAmplitude");
 
-        float tempVar = (Time.time * waveSpeed) + (waveFrequency * twoPI * pos.x);
+        float tempVar = (Time.time * waveSpeed) + (waveFrequency * twoPI * pos.y);
 
         float waveHeight1 = waveAmplitude * Mathf.Sin(tempVar);
 
         float waveHeight2 = waveHeight1 + transform.position.y;
-
+        
         return waveHeight2;
     }
 }
