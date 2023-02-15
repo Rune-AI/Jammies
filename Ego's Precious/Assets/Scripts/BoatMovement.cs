@@ -39,17 +39,20 @@ public class BoatMovement : MonoBehaviour
         if (!riverNodes[1])
         {
             Debug.LogError("No start node found");
+            endGame = true;
         }
         else
         {
             if(riverNodes[1].NextNodes.Count == 0) 
             {
                 Debug.LogError("startnode doesn't have next node");
+                endGame = true;
                 return;
             }
             if (riverNodes[1].NextNodes.Count > 1)
             {
                 Debug.LogError("startnode isn't allowed to have more than 1 next node");
+                endGame = true;
                 return;
             }
 
@@ -72,6 +75,7 @@ public class BoatMovement : MonoBehaviour
                 if (!riverNode)
                 {
                     Debug.LogError("empty node assigned");
+                    endGame = true;
                     return;
                 }
             }
