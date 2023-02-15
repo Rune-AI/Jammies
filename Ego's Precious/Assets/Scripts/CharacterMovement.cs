@@ -33,6 +33,107 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
+
+        Vector2 localPosition2d = new Vector2(transform.localPosition.x, transform.localPosition.z);
+        if (!IsPointInPolygon(localPosition2d, boundsPolygon))
+        {
+            Vector2 closePoint1 = Vector2.zero;
+            Vector2 closePoint2 = Vector2.zero;
+            float closeDistance1 = float.MaxValue;
+            float closeDistance2 = float.MaxValue;
+
+            foreach(Vector2 point in boundsPolygon) 
+            {
+                float distance = Vector2.Distance(localPosition2d, point);
+                if(distance < closeDistance1)
+                {
+                    closeDistance1 = distance;
+                    closePoint1 = point;
+                }
+                else if (distance > closeDistance2)
+                {
+                    closeDistance2 = distance;
+                    closePoint2 = point;
+                }
+            }
+
+            Vector2 p1p2 = closePoint2 - closePoint1;
+            Vector2 perpendicular = new Vector2(p1p2.y, -p1p2.x);
+            perpendicular.Normalize();
+            perpendicular *= 100;
+
+            Vector2 newPos = localPosition2d + perpendicular;
+
+            float l1 = 0;
+            float l2 = 0;
+
+            if (IntersectLineSegments(closePoint1, closePoint2, localPosition2d, newPos, ref l1, ref l2, 0.0001f))
+            {
+                Vector3 newLocalPosV3 = new Vector3(l1, transform.localPosition.y, l2);
+                transform.localPosition = newLocalPosV3;
+            }
+            else
+            {
+                newPos = localPosition2d - perpendicular;
+
+                IntersectLineSegments(closePoint1, closePoint2, localPosition2d, newPos, ref l1, ref l2, 0.0001f);
+
+                Vector3 newLocalPosV3 = new Vector3(l1, transform.localPosition.y, l2);
+                transform.localPosition = newLocalPosV3;
+            }
+        }
+
+        //nextMoveVector = new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.fixedDeltaTime;
+        //Vector3 newPosition = transform.localPosition + nextMoveVector * 10;
+
+        //bool colliding = false;
+        //foreach (BoxCollider collider in boatColliders)
+        //{
+        //    if (newPosition.x < collider.center.x + collider.size.x / 2
+        //        && newPosition.x > collider.center.x - collider.size.x / 2
+        //        && newPosition.y < collider.center.y + collider.size.y / 2
+        //        && newPosition.y > collider.center.y - collider.size.y / 2
+        //        && newPosition.z < collider.center.z + collider.size.z / 2
+        //        && newPosition.z > collider.center.z - collider.size.z / 2)
+
+        //    {
+        //        colliding = true;
+        //        break;
+        //    }
+        //}
+
+        //if (!colliding)
+        //{
+        //    transform.localPosition += nextMoveVector;
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //Vector3 moveVector = transform.parent.transform.TransformVector(new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime);
         //characterController.Move(moveVector);
 
@@ -63,29 +164,7 @@ public class CharacterMovement : MonoBehaviour
         //    transform.localPosition = GetClosestPointOnBounds(bounds, transform.localPosition);
         //}
 
-        nextMoveVector = new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.fixedDeltaTime;
-        Vector3 newPosition = transform.localPosition + nextMoveVector * 10;
 
-        bool colliding = false;
-        foreach (BoxCollider collider in boatColliders)
-        {
-            if (newPosition.x < collider.center.x + collider.size.x / 2
-                && newPosition.x > collider.center.x - collider.size.x / 2
-                && newPosition.y < collider.center.y + collider.size.y / 2
-                && newPosition.y > collider.center.y - collider.size.y / 2
-                && newPosition.z < collider.center.z + collider.size.z / 2
-                && newPosition.z > collider.center.z - collider.size.z / 2)
-
-            {
-                colliding = true;
-                break;
-            }
-        }
-
-        if (!colliding)
-        {
-            transform.localPosition += nextMoveVector;
-        }
 
 
         //nextMoveVector = new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.fixedDeltaTime;
