@@ -15,17 +15,24 @@ public class BoatMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
 
+    private RiverNodeManager riverNodeManager;
+
     private List<RiverNode> riverNodes = Enumerable.Repeat<RiverNode>(null, 4).ToList(); //fill list with 4 empty nodes
 
     private bool endGame;
 
     private Vector2 movementInput;
 
+    private void Awake()
+    {
+        riverNodeManager = FindObjectOfType<RiverNodeManager>();
+    }
+
     private void Start()
     {
         float closestDistance = float.MaxValue;
 
-        foreach (RiverNode riverNode in FindObjectsOfType<RiverNode>())
+        foreach (RiverNode riverNode in riverNodeManager.RiverNodes)
         {
             float distance = Vector3.Distance(transform.position, riverNode.transform.position);
             if (distance < closestDistance)
@@ -88,6 +95,16 @@ public class BoatMovement : MonoBehaviour
         {
             return;
         }
+
+        if(transform.rotation.eulerAngles.z > 180)
+        {
+            movementInput.x = 0.5f;
+        }
+        else
+        {
+            movementInput.x = -0.5f;
+        }
+
 
         Vector3 currentToNextNode = riverNodes[2].transform.position - riverNodes[1].transform.position;
         currentToNextNode.Normalize();
@@ -182,11 +199,11 @@ public class BoatMovement : MonoBehaviour
 
         Quaternion neededRotation = Quaternion.LookRotation(GetPositionBetweenNodes(t + (1 - reachedNodeValue)) - posBetweenNodes);
 
-        Vector3 rotation = transform.eulerAngles;
-        rotation.y = neededRotation.eulerAngles.y;
-        transform.eulerAngles = rotation;
+        //Vector3 rotation = transform.eulerAngles;
+        //rotation.y = neededRotation.eulerAngles.y;
+        //transform.eulerAngles = rotation;
 
-        //Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, Time.deltaTime * rotationSpeed);
 
         //Debug.Log("t: " + t);
         //Debug.Log("river width: " + riverWidth);

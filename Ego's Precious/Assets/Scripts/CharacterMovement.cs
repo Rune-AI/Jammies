@@ -8,18 +8,37 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private float downWardForce = 1;
+    [SerializeField] private Vector2 minMoveLimit;
+    [SerializeField] private Vector2 maxMoveLimit;
+
+    private Rigidbody ownRigidbody;
 
     private Vector2 movementInput;
+
+    private Vector3 nextMoveVector;
 
     private GameObject boat;
 
     private void Awake()
     {
         boat = transform.parent.gameObject;
+
+        ownRigidbody = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
+        //transform.Translate(nextMoveVector);
+
+        //Vector3 newPosition = transform.position + new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
+
+        //if (newPosition.x < maxMoveLimit.x && newPosition.x > minMoveLimit.x && newPosition.y < maxMoveLimit.y && newPosition.y > minMoveLimit.y)
+        //{
+
+        //}
+
+        //ownRigidbody.velocity = Vector3.zero;
+
         transform.Translate(new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime);
 
         rigidBody.AddForceAtPosition(Physics.gravity * downWardForce, transform.position, ForceMode.Acceleration);
@@ -34,5 +53,10 @@ public class CharacterMovement : MonoBehaviour
     public void OnMove(InputValue value)
     {
         movementInput = value.Get<Vector2>();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        
     }
 }
