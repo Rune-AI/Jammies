@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +10,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private bool visualize;
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private float moveSpeed = 1;
+    [SerializeField] private float rotateSpeed = 1;
     [SerializeField] private float downWardForce = 1;
     //[SerializeField] private List<BoxCollider> boatColliders;
     [SerializeField] private List<Vector2> outerBoundsPolygon;
@@ -38,10 +39,11 @@ public class CharacterMovement : MonoBehaviour
     {
         transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
 
-        if(movementInput.x != 0 && movementInput.y != 0)
+        if(movementInput.x != 0 || movementInput.y != 0)
         {
-            //Quaternion lookRotation = ;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(transform.parent.transform.TransformDirection(new Vector3(movementInput.x, 0, movementInput.y))), 10 * Time.deltaTime);
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(movementInput.x, 0, movementInput.y));
+            transform.localRotation = lookRotation;
+            //transform.localRotation = Quaternion.RotateTowards(transform.localRotation, lookRotation, rotateSpeed * Time.deltaTime);
 
             //transform.localRotation = Quaternion.Lerp(transform.localRotation, lookRotation, Time.fixedDeltaTime * 10);
         }

@@ -995,9 +995,69 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8383124558419344257, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: -8380157826906577798, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: -6577237425059042219, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: -5546747315237514756, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: -5063223942988036812, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: -4636300777304409883, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: -3798597711559607027, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: -2914413575082383075, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
       propertyPath: m_Name
       value: Mesh_Boat_Seperate
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971542036940430761, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849762623622064168, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214726985332892257, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245042011116262203, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512510688612296998, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 6919683763462532184, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
+      propertyPath: m_TagString
+      value: Boat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e61ffaa2bad722546a00b728b667d9ca, type: 3}
@@ -1172,7 +1232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f87e132c6365664fa77dc6637bdc946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loseSceneName: 
+  loseScreen: {fileID: 0}
   waterLevelRisingTreshold: 2
   waterRiseSpeed: 0.05
   minDepthBeforeSubmerged: 1
@@ -1190,8 +1250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b6ff6a70b000e4c9d5f04d2e2d73d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winSceneName: 
-  moveSpeed: 0
+  winSceneName: Credits
+  moveSpeed: -5
   rotationSpeed: 20
   tiltedMoveSpeed: 10
   sidePushSpeed: 2
