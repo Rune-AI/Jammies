@@ -187,6 +187,11 @@ public class HoleAndStickerManager : MonoBehaviour
                 other.tag = "Untagged";
                 break;
             case "Sticker":
+                Sticker stickerComponent = other.GetComponent<Sticker>();
+                if (stickerComponent == null)
+                {
+                    other = other.transform.parent.gameObject;
+                }
                 other.GetComponent<Sticker>().SetStickyMode(false);
                 other.GetComponent<Sticker>().SetDecalMode(true);
                 other.transform.position = point;
