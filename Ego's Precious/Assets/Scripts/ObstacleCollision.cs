@@ -33,6 +33,7 @@ public class ObstacleCollision : MonoBehaviour
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, UnityEngine.Color.white);
             Debug.Log("Did not Hit");
+            return;
         }
 
 
