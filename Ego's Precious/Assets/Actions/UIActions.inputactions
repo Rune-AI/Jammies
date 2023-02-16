@@ -82,6 +82,17 @@
                 },
                 {
                     "name": "",
+                    "id": "26ab9fb9-7989-4a2d-89a2-72bdac3ef30f",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "dc1a44f8-757e-4e87-a52b-d44da363fcd4",
                     "path": "<Keyboard>/w",
                     "interactions": "",
