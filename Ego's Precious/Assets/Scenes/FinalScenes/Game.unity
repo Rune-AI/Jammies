@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 55404245}
   - component: {fileID: 55404246}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cube (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,17 +400,33 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7688544341640540433, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -3467645960873691192, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3467645960873691192, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3231799560515051345, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3231799560515051345, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -1736294561448580372, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1736294561448580372, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
       propertyPath: m_Name
@@ -432,6 +448,10 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1862683380592654404, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2433521823896634942, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
       propertyPath: m_Convex
       value: 1
@@ -440,17 +460,33 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3582485502554205722, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3992821089717684419, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992821089717684419, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5851714846495295630, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5851714846495295630, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6113270363635034664, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6113270363635034664, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6429042682342845315, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
       propertyPath: m_Convex
@@ -464,9 +500,17 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6742017470442587127, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8991449380991483095, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991449380991483095, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee81b998bca3fab4c817c7d5b9b987c0, type: 3}
@@ -732,7 +776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 338382875}
   - component: {fileID: 338382876}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cube (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -924,7 +968,7 @@ GameObject:
   - component: {fileID: 673428688}
   - component: {fileID: 673428691}
   - component: {fileID: 673428690}
-  - component: {fileID: 673428689}
+  - component: {fileID: 673428692}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -948,36 +992,6 @@ Transform:
   m_Father: {fileID: 1202860666}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &673428689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673428687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: 0
-  m_Camera: {fileID: 0}
 --- !u!114 &673428690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,6 +1030,36 @@ MonoBehaviour:
   - {x: -1, y: -2}
   - {x: 1, y: -2}
   - {x: 1, y: 2}
+--- !u!114 &673428692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673428687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: 0
+  m_Camera: {fileID: 0}
 --- !u!1 &748165888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,10 +1481,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 32
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &1202860669
 MonoBehaviour:
@@ -1454,7 +1498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f87e132c6365664fa77dc6637bdc946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endScreen: {fileID: 0}
+  endScreen: {fileID: 170462104}
   waterLevelRisingTreshold: 2
   waterRiseSpeed: 0.05
   minDepthBeforeSubmerged: 1
@@ -1473,7 +1517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HolePrefab: {fileID: 4928685278690295843, guid: 39a7c8704a21db3488395617e6e5850d, type: 3}
-  StickerPrefab: {fileID: 861696764}
+  StickerPrefab: {fileID: 4928685278690295843, guid: 2a1f4259cf422464fbcd7b1e235b4f9c, type: 3}
   holeMaterials:
   - {fileID: 2100000, guid: b893dd1d1ece42d4bb4131858d8aa152, type: 2}
   - {fileID: 2100000, guid: 136ad0bce6dbe0949bcb5080c0aa655b, type: 2}
@@ -1497,19 +1541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c155da65d407254aadd2bdb018d3a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HolePrefab: {fileID: 4928685278690295843, guid: 39a7c8704a21db3488395617e6e5850d, type: 3}
-  StickerPrefab: {fileID: 4928685278690295843, guid: 2a1f4259cf422464fbcd7b1e235b4f9c, type: 3}
-  holeMaterials:
-  - {fileID: 2100000, guid: b893dd1d1ece42d4bb4131858d8aa152, type: 2}
-  - {fileID: 2100000, guid: 136ad0bce6dbe0949bcb5080c0aa655b, type: 2}
-  - {fileID: 2100000, guid: ca729e33b37128747b220faf835478ad, type: 2}
-  - {fileID: 2100000, guid: 87154acf8e837094591e2a0b2c0909ae, type: 2}
-  - {fileID: 2100000, guid: 87673ba4d748c1f429e65919130baac7, type: 2}
-  stickerMaterials:
-  - {fileID: 2100000, guid: dca41dda78e1de8468acab0ca62ba0a3, type: 2}
-  - {fileID: 2100000, guid: 73f67a85b86f821428c3d7d55f0dfae5, type: 2}
-  - {fileID: 2100000, guid: eb7e54f23a5ce0e48a6ba47e491388bb, type: 2}
-  - {fileID: 2100000, guid: 01b0331a9682ce5468a2247a3d67fb0d, type: 2}
 --- !u!114 &1202860672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1860,7 +1891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1621645466}
   - component: {fileID: 1621645467}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cube (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1980,7 +2011,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652486558}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BoatCollidersForCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2198,7 +2229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1847791619}
   - component: {fileID: 1847791620}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Cube (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
