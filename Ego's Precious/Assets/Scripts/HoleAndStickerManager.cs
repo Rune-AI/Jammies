@@ -238,7 +238,7 @@ public class HoleAndStickerManager : MonoBehaviour
         //AddSticker(sticker2D);
         //Destroy(sticker);
 
-        closestHole.SetActive(false);
+        //closestHole.SetActive(false);
     }
 
     public void PasteStickerOnGround(GameObject sticker)
