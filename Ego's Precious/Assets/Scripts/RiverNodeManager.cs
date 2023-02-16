@@ -6,6 +6,8 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class RiverNodeManager : MonoBehaviour
 {
+    [SerializeField] private bool visualize;
+
     private List<RiverNode> riverNodes;
 
     public List<RiverNode> RiverNodes
@@ -20,12 +22,22 @@ public class RiverNodeManager : MonoBehaviour
 
     private void Update()
     {
+        if (!visualize)
+        {
+            return;
+        }
+
         riverNodes = new List<RiverNode>(FindObjectsOfType<RiverNode>());
     }
 
     private void OnDrawGizmos()
     {
-        foreach(RiverNode node in riverNodes)
+        if (!visualize)
+        {
+            return;
+        }
+
+        foreach (RiverNode node in riverNodes)
         {
             Gizmos.DrawSphere(node.transform.position, 0.5f);
             foreach(RiverNode nodeNeighbour in node.NextNodes)

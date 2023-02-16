@@ -14,6 +14,8 @@ public class BoatMovement : MonoBehaviour
     //public GameObject visual;
     //public GameObject visualBezier;
 
+    [SerializeField] private GameObject winScreen;
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float tiltedMoveSpeed = 10;
@@ -36,6 +38,11 @@ public class BoatMovement : MonoBehaviour
     private void Awake()
     {
         riverNodeManager = FindObjectOfType<RiverNodeManager>();
+
+        if (!winScreen)
+        {
+            Debug.LogError("winscreen not assigned");
+        }
     }
 
     private void Start()
@@ -145,6 +152,10 @@ public class BoatMovement : MonoBehaviour
             if (riverNodes[1].NextNodes.Count == 0)
             {
                 endGame = true;
+                if (winScreen)
+                {
+                    winScreen.SetActive(true);
+                }                
                 return;
             }
 

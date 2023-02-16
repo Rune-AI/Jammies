@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +11,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private float downWardForce = 1;
     [SerializeField] private List<BoxCollider> boatColliders;
-    [SerializeField] private List<Vector2> boundsPolygon;
+    [SerializeField] private List<Vector2> outerBoundsPolygon;
+    [SerializeField] private List<Vector2> innerBoundsPolygon;
 
     //private CharacterController characterController;
 
@@ -36,53 +38,83 @@ public class CharacterMovement : MonoBehaviour
         transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
 
         Vector2 localPosition2d = new Vector2(transform.localPosition.x, transform.localPosition.z);
-        if (!IsPointInPolygon(localPosition2d, boundsPolygon))
+        if (!IsPointInPolygon(localPosition2d, outerBoundsPolygon))
         {
-            Vector2 closePoint1 = Vector2.zero;
-            Vector2 closePoint2 = Vector2.zero;
-            float closeDistance1 = float.MaxValue;
-            float closeDistance2 = float.MaxValue;
+            float closestDistance = float.MaxValue;
+            Vector2 closestProjPoint = Vector2.zero;
 
-            foreach(Vector2 point in boundsPolygon) 
+            for(int i = 0; i < outerBoundsPolygon.Count - 1; ++i) 
             {
-                float distance = Vector2.Distance(localPosition2d, point);
-                if(distance < closeDistance1)
+                Vector2 p1 = outerBoundsPolygon[i];
+                Vector2 p2 = outerBoundsPolygon[i + 1];
+
+                //calc proj point
+                Vector2 projPoint = GetProjectedPointOnSegment(p1,p2,localPosition2d);
+
+                float distance = Vector2.Distance(localPosition2d, projPoint);
+                if(distance < closestDistance)
                 {
-                    closeDistance1 = distance;
-                    closePoint1 = point;
-                }
-                else if (distance > closeDistance2)
-                {
-                    closeDistance2 = distance;
-                    closePoint2 = point;
+                    closestDistance = distance;
+                    closestProjPoint = projPoint;
                 }
             }
 
-            Vector2 p1p2 = closePoint2 - closePoint1;
-            Vector2 perpendicular = new Vector2(p1p2.y, -p1p2.x);
-            perpendicular.Normalize();
-            perpendicular *= 100;
+            Vector3 newPos = new Vector3(closestProjPoint.x, transform.localPosition.y, closestProjPoint.y);
 
-            Vector2 newPos = localPosition2d + perpendicular;
-
-            float l1 = 0;
-            float l2 = 0;
-
-            if (IntersectLineSegments(closePoint1, closePoint2, localPosition2d, newPos, ref l1, ref l2, 0.0001f))
-            {
-                Vector3 newLocalPosV3 = new Vector3(l1, transform.localPosition.y, l2);
-                transform.localPosition = newLocalPosV3;
-            }
-            else
-            {
-                newPos = localPosition2d - perpendicular;
-
-                IntersectLineSegments(closePoint1, closePoint2, localPosition2d, newPos, ref l1, ref l2, 0.0001f);
-
-                Vector3 newLocalPosV3 = new Vector3(l1, transform.localPosition.y, l2);
-                transform.localPosition = newLocalPosV3;
-            }
+            transform.localPosition = newPos;
         }
+        else if (IsPointInPolygon(localPosition2d, innerBoundsPolygon))
+        {
+            float closestDistance = float.MaxValue;
+            Vector2 closestProjPoint = Vector2.zero;
+
+            for (int i = 0; i < innerBoundsPolygon.Count - 1; ++i)
+            {
+                Vector2 p1 = innerBoundsPolygon[i];
+                Vector2 p2 = innerBoundsPolygon[i + 1];
+
+                //calc proj point
+                Vector2 projPoint = GetProjectedPointOnSegment(p1, p2, localPosition2d);
+
+                float distance = Vector2.Distance(localPosition2d, projPoint);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestProjPoint = projPoint;
+                }
+            }
+
+            Vector3 newPos = new Vector3(closestProjPoint.x, transform.localPosition.y, closestProjPoint.y);
+
+            transform.localPosition = newPos;
+        }
+
+
+
+        //Vector2 p1p2 = closePoint2 - closePoint1;
+        //Vector2 perpendicular = new Vector2(p1p2.y, -p1p2.x);
+        //perpendicular.Normalize();
+        //perpendicular *= 100;
+
+        //Vector2 newPos = localPosition2d + perpendicular;
+
+        //float l1 = 0;
+        //float l2 = 0;
+
+        //if (IntersectLineSegments(closePoint1, closePoint2, localPosition2d, newPos, ref l1, ref l2, 0.0001f))
+        //{
+        //    Vector3 newLocalPosV3 = new Vector3(l1, transform.localPosition.y, l2);
+        //    transform.localPosition = newLocalPosV3;
+        //}
+        //else
+        //{
+        //    newPos = localPosition2d - perpendicular;
+
+        //    IntersectLineSegments(closePoint1, closePoint2, localPosition2d, newPos, ref l1, ref l2, 0.0001f);
+
+        //    Vector3 newLocalPosV3 = new Vector3(l1, transform.localPosition.y, l2);
+        //    transform.localPosition = newLocalPosV3;
+        //}
 
         //nextMoveVector = new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.fixedDeltaTime;
         //Vector3 newPosition = transform.localPosition + nextMoveVector * 10;
@@ -236,6 +268,58 @@ public class CharacterMovement : MonoBehaviour
         movementInput = value.Get<Vector2>();
     }
 
+    private void OnDrawGizmos()
+    {
+        for(int i = 0; i < outerBoundsPolygon.Count - 1; ++i)
+        {
+            Vector3 p1 = new Vector3(outerBoundsPolygon[i].x, transform.localPosition.y, outerBoundsPolygon[i].y);
+            Vector3 p2 = new Vector3(outerBoundsPolygon[i + 1].x, transform.localPosition.y, outerBoundsPolygon[i + 1].y);
+            p1 += transform.parent.transform.position;
+            p2 += transform.parent.transform.position;
+
+            Gizmos.DrawSphere(p1, 0.1f);
+            Gizmos.DrawLine(p1, p2);
+        }
+        Vector3 p3 = new Vector3(outerBoundsPolygon[outerBoundsPolygon.Count - 1].x, transform.localPosition.y, outerBoundsPolygon[outerBoundsPolygon.Count - 1].y);
+        Vector3 p4 = new Vector3(outerBoundsPolygon[0].x, transform.localPosition.y, outerBoundsPolygon[0].y);
+        p3 += transform.parent.transform.position;
+        p4 += transform.parent.transform.position;
+
+        Gizmos.DrawSphere(p3, 0.1f);
+        Gizmos.DrawLine(p3, p4);
+
+        for (int i = 0; i < innerBoundsPolygon.Count - 1; ++i)
+        {
+            Vector3 p1 = new Vector3(innerBoundsPolygon[i].x, transform.localPosition.y, innerBoundsPolygon[i].y);
+            Vector3 p2 = new Vector3(innerBoundsPolygon[i + 1].x, transform.localPosition.y, innerBoundsPolygon[i + 1].y);
+            p1 += transform.parent.transform.position;
+            p2 += transform.parent.transform.position;
+
+            Gizmos.DrawSphere(p1, 0.1f);
+            Gizmos.DrawLine(p1, p2);
+        }
+        p3 = new Vector3(innerBoundsPolygon[innerBoundsPolygon.Count - 1].x, transform.localPosition.y, innerBoundsPolygon[innerBoundsPolygon.Count - 1].y);
+        p4 = new Vector3(innerBoundsPolygon[0].x, transform.localPosition.y, innerBoundsPolygon[0].y);
+        p3 += transform.parent.transform.position;
+        p4 += transform.parent.transform.position;
+
+        Gizmos.DrawSphere(p3, 0.1f);
+        Gizmos.DrawLine(p3, p4);
+    }
+
+
+    Vector2 GetProjectedPointOnSegment(Vector2 v, Vector2 w, Vector2 p)
+    {
+        float l2 = (w.x - v.x)*(w.x - v.x) + (w.y - v.y)*(w.y - v.y);
+        //float l2 = Vector2.Distance(v, w) * Vector2.Distance(v, w);
+        if (l2 == 0) //v == w
+        {
+            return v;
+        }
+
+        float t = Mathf.Clamp01(Vector2.Dot(p - v, w - v) / l2);
+        return v + t * (w - v);
+    }
 
 
     bool IsPointInPolygon(Vector2 p, List<Vector2> polygon)
