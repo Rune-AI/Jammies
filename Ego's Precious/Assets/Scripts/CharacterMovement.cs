@@ -26,8 +26,12 @@ public class CharacterMovement : MonoBehaviour
 
     //private GameObject boat;
 
+    private Animator animator;
+    public GameObject charMesh;
+
     private void Awake()
     {
+        animator = charMesh.GetComponent<Animator>();
         //boat = transform.parent.gameObject;
 
         //ownRigidbody = GetComponent<Rigidbody>();
@@ -37,6 +41,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (movementInput != Vector2.zero)
+            animator.SetBool("isMoving", true);
+        else
+            animator.SetBool("isMoving", false);
+
         transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
 
         if(movementInput.x != 0 || movementInput.y != 0)
