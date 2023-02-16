@@ -12,7 +12,7 @@ public class StartScreenManager : MonoBehaviour
     {
         //Debug.Log("Start Game");
         //startScreen.SetActive(false);
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene(1);
         
     }
 }
