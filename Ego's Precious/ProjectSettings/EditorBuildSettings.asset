@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalScenes/StartScreen.unity
     guid: 0d298a8afc3b9ae4ca6dbdd3f6796df8
-  - enabled: 0
-    path: Assets/Scenes/FinalScenes/Game.unity
-    guid: 80835011a91aa5c4d9089e34526d5332
   - enabled: 1
     path: Assets/Scenes/FinalScenes/hexagonMapTest.unity
     guid: 2da0c735820080f4b91e178374029742
