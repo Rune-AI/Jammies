@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Diagnostics;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+//using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using static UnityEngine.Rendering.DebugUI;
 
 public class BoatMovement : MonoBehaviour
