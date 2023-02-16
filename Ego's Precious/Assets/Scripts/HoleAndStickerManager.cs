@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.Rendering.Universal;
 
+
 public class HoleAndStickerManager : MonoBehaviour
 {
     [NonSerialized] public static HoleAndStickerManager instance;
@@ -22,9 +23,12 @@ public class HoleAndStickerManager : MonoBehaviour
     [SerializeField] private List<Material> holeMaterials;
     [SerializeField] private List<Material> stickerMaterials;
 
+    private SoundEffectPlayer soundEffectPlayer;
 
     private void Awake()
     {
+        soundEffectPlayer = FindObjectOfType<SoundEffectPlayer>();
+
         holes = new List<GameObject>();
         stickers = new List<GameObject>();
         
@@ -181,6 +185,20 @@ public class HoleAndStickerManager : MonoBehaviour
         switch (other.tag)
         {
             case "Obstacle":
+                int rand = UnityEngine.Random.Range(0, 2);
+                switch (rand)
+                {
+                    case 0:
+                        soundEffectPlayer.PlayTear();
+                        break;
+                    case 1:
+                        soundEffectPlayer.PlayTearFast();
+                        break;
+                    case 2:
+                        soundEffectPlayer.PlayTearCardboard();
+                        break;
+                }
+                
                 GameObject hole = addPrefab(HolePrefab, point, normal, HolesParent);
                 hole.GetComponent<DecalProjector>().material = GetRandomHoleMaterial();
                 AddHole(hole);
@@ -227,6 +245,8 @@ public class HoleAndStickerManager : MonoBehaviour
 
     public void PasteStickerOnHole(GameObject sticker, GameObject closestHole)
     {
+        soundEffectPlayer.PlayBandaid();
+
         sticker.GetComponent<Sticker>().SetStickyMode(false);
         sticker.GetComponent<Sticker>().SetDecalMode(true);
         sticker.transform.position = closestHole.transform.position;
