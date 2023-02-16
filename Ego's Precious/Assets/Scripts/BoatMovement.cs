@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -14,7 +15,7 @@ public class BoatMovement : MonoBehaviour
     //public GameObject visual;
     //public GameObject visualBezier;
 
-    [SerializeField] private GameObject winScreen;
+    [SerializeField] private string winSceneName;
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
@@ -39,9 +40,9 @@ public class BoatMovement : MonoBehaviour
     {
         riverNodeManager = FindObjectOfType<RiverNodeManager>();
 
-        if (!winScreen)
+        if (winSceneName == "")
         {
-            Debug.LogError("winscreen not assigned");
+            Debug.LogError("winSceneName not assigned");
         }
     }
 
@@ -152,10 +153,10 @@ public class BoatMovement : MonoBehaviour
             if (riverNodes[1].NextNodes.Count == 0)
             {
                 endGame = true;
-                if (winScreen)
+                if (winSceneName != "")
                 {
-                    winScreen.SetActive(true);
-                }                
+                    SceneManager.LoadScene(winSceneName);
+                }
                 return;
             }
 
