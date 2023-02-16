@@ -10,25 +10,25 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private float downWardForce = 1;
-    [SerializeField] private List<BoxCollider> boatColliders;
+    //[SerializeField] private List<BoxCollider> boatColliders;
     [SerializeField] private List<Vector2> outerBoundsPolygon;
     [SerializeField] private List<Vector2> innerBoundsPolygon;
 
     //private CharacterController characterController;
 
-    private Rigidbody ownRigidbody;
+    //private Rigidbody ownRigidbody;
 
     private Vector2 movementInput;
 
-    private Vector3 nextMoveVector;
+    //private Vector3 nextMoveVector;
 
-    private GameObject boat;
+    //private GameObject boat;
 
     private void Awake()
     {
-        boat = transform.parent.gameObject;
+        //boat = transform.parent.gameObject;
 
-        ownRigidbody = GetComponent<Rigidbody>();
+        //ownRigidbody = GetComponent<Rigidbody>();
 
         //characterController = GetComponent<CharacterController>();
     }
@@ -60,6 +60,19 @@ public class CharacterMovement : MonoBehaviour
                 }
             }
 
+            Vector2 p3 = innerBoundsPolygon[innerBoundsPolygon.Count - 1];
+            Vector2 p4 = innerBoundsPolygon[0];
+
+            //calc proj point
+            Vector2 projPoint2 = GetProjectedPointOnSegment(p3, p4, localPosition2d);
+
+            float distance2 = Vector2.Distance(localPosition2d, projPoint2);
+            if (distance2 < closestDistance)
+            {
+                closestDistance = distance2;
+                closestProjPoint = projPoint2;
+            }
+
             Vector3 newPos = new Vector3(closestProjPoint.x, transform.localPosition.y, closestProjPoint.y);
 
             transform.localPosition = newPos;
@@ -83,6 +96,18 @@ public class CharacterMovement : MonoBehaviour
                     closestDistance = distance;
                     closestProjPoint = projPoint;
                 }
+            }
+            Vector2 p3 = innerBoundsPolygon[innerBoundsPolygon.Count - 1];
+            Vector2 p4 = innerBoundsPolygon[0];
+
+            //calc proj point
+            Vector2 projPoint2 = GetProjectedPointOnSegment(p3, p4, localPosition2d);
+
+            float distance2 = Vector2.Distance(localPosition2d, projPoint2);
+            if (distance2 < closestDistance)
+            {
+                closestDistance = distance2;
+                closestProjPoint = projPoint2;
             }
 
             Vector3 newPos = new Vector3(closestProjPoint.x, transform.localPosition.y, closestProjPoint.y);
