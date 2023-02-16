@@ -688,7 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 6743590462165905097}
   moveSpeed: 1
-  downWardForce: 1
+  downWardForce: 0
   outerBoundsPolygon:
   - {x: 0.02, y: -2.89}
   - {x: -0.88, y: -1.67}
