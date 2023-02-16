@@ -9,6 +9,6 @@ public class ObjectFloater : MonoBehaviour
     {
         //Debug.Log(transform.position);
         float waveHeight = WaterHeight.instance.GetWaveHeight(new Vector2(transform.position.x, transform.position.z));
-        transform.position = new Vector3(transform.position.x, waveHeight, transform.position.z);
+        transform.position = new Vector3(transform.position.x, waveHeight + 0.03f, transform.position.z);
     }
 }
