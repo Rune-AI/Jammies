@@ -15,7 +15,7 @@ public class BoatMovement : MonoBehaviour
     //public GameObject visual;
     //public GameObject visualBezier;
 
-    [SerializeField] private string winSceneName;
+    [SerializeField] private GameObject creditSceneManager;
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
@@ -40,9 +40,9 @@ public class BoatMovement : MonoBehaviour
     {
         riverNodeManager = FindObjectOfType<RiverNodeManager>();
 
-        if (winSceneName == "")
+        if (!creditSceneManager)
         {
-            Debug.LogError("winSceneName not assigned");
+            Debug.LogError("winScreen not assigned");
         }
     }
 
@@ -152,10 +152,11 @@ public class BoatMovement : MonoBehaviour
 
             if (riverNodes[1].NextNodes.Count == 0)
             {
+                Debug.Log("endgame");
                 endGame = true;
-                if (winSceneName != "")
+                if (creditSceneManager)
                 {
-                    SceneManager.LoadScene(winSceneName);
+                    creditSceneManager.SetActive(true);
                 }
                 return;
             }

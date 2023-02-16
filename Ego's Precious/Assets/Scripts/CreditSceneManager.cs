@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class CreditSceneManager : MonoBehaviour
 {
-    private bool isPlaying = false;
+    [SerializeField] private GameObject credits;
 
+    private bool isPlaying = false;
+    
     private void OnEnable()
     {
-        StartCoroutine(ChangeColor(5));
+        StartCoroutine(StartCredits(5));
     }
-    public IEnumerator ChangeColor(float t)
+    public IEnumerator StartCredits(float t)
     {
         yield return new WaitForSeconds(t);
         isPlaying = true;
     }
 
 
-    private void OnAnyButtonPressed()
+    private void OnStartGame()
     {
-        
+        if(isPlaying)
+        {
+            gameObject.SetActive(false);
+            credits.SetActive(true);
+        }
     }
 }
