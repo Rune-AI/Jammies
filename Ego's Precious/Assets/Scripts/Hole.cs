@@ -27,9 +27,9 @@ public class Hole : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        Debug.Log(IsHoleUnderWater());
         if (IsHoleUnderWater())
-        { 
+        {
+            Debug.Log("Water Activated");
             waterEffect.Play();
             //waterParticles.Play();
         }
@@ -40,9 +40,25 @@ public class Hole : MonoBehaviour
         }
     }
 
-    
+    private void OnEnable()
+    {
+        if (IsHoleUnderWater())
+        {
+            Debug.Log("Water Activated");
+            waterEffect.Play();
+            //waterParticles.Play();
+        }
+        else
+        {
+            waterEffect.Stop();
+            //waterParticles.Stop();
+        }
+    }
+
+
     private bool IsHoleUnderWater()
     {
+        
         float WaterY = WaterHeight.instance.GetWaterHeight(new Vector2(transform.position.x, transform.position.z));
 
         return transform.position.y < WaterY + 1.5f;

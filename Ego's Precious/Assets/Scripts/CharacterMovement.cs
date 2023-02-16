@@ -35,6 +35,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
 
         Vector2 localPosition2d = new Vector2(transform.localPosition.x, transform.localPosition.z);
