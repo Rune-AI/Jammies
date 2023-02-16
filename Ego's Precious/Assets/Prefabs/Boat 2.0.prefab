@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759b8ae8a1c93f2418e256c19cc3b6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   depthBeforeSublerged: 1
   displacementAmount: 5
   floaterCount: 10
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759b8ae8a1c93f2418e256c19cc3b6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   depthBeforeSublerged: 1
   displacementAmount: 3
   floaterCount: 10
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759b8ae8a1c93f2418e256c19cc3b6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   depthBeforeSublerged: 1
   displacementAmount: 3
   floaterCount: 10
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759b8ae8a1c93f2418e256c19cc3b6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   depthBeforeSublerged: 1
   displacementAmount: 3
   floaterCount: 10
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759b8ae8a1c93f2418e256c19cc3b6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   depthBeforeSublerged: 1
   displacementAmount: 3
   floaterCount: 10
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759b8ae8a1c93f2418e256c19cc3b6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   depthBeforeSublerged: 1
   displacementAmount: 3
   floaterCount: 10
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759b8ae8a1c93f2418e256c19cc3b6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   depthBeforeSublerged: 1
   displacementAmount: 3
   floaterCount: 10
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759b8ae8a1c93f2418e256c19cc3b6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   depthBeforeSublerged: 1
   displacementAmount: 5
   floaterCount: 10
@@ -600,7 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759b8ae8a1c93f2418e256c19cc3b6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   depthBeforeSublerged: 1
   displacementAmount: 3
   floaterCount: 10
@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b223ba2e7d821d4796c41d161e5208e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   moveSpeed: 1
   downWardForce: 1
   outerBoundsPolygon:
@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759b8ae8a1c93f2418e256c19cc3b6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
   depthBeforeSublerged: 1
   displacementAmount: 3
   floaterCount: 10
@@ -856,7 +856,7 @@ MonoBehaviour:
   windSpeedChange: 0
   windDirectionChange: 0
   windForceChange: 0
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 6743590462165905097}
 --- !u!1001 &3758136013864500872
 PrefabInstance:
   m_ObjectHideFlags: 0
