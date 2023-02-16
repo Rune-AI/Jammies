@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BoatWaterLevel : MonoBehaviour
 {
-    [SerializeField] private GameObject endScreen;
+    [SerializeField] private GameObject loseScreen;
     [SerializeField] private int waterLevelRisingTreshold = 2;
     [SerializeField] private float waterRiseSpeed = 0.05f;
     [SerializeField] private float minDepthBeforeSubmerged = 1;
@@ -29,9 +30,9 @@ public class BoatWaterLevel : MonoBehaviour
 
         boatMovement = GetComponent<BoatMovement>();
 
-        if (!endScreen)
+        if (!loseScreen)
         {
-            Debug.LogError("endscreen not assigned");
+            Debug.LogError("loseScreen not assigned");
         }
     }
 
@@ -44,11 +45,11 @@ public class BoatWaterLevel : MonoBehaviour
         if(waterLevelPercentage > 1)
         {
             boatMovement.EndGame = true;
-            if (endScreen)
+            if (loseScreen)
             {
-                endScreen.SetActive(true);
+                loseScreen.SetActive(true);
             }
-            return;
+            waterLevelPercentage = 1;
         }
         if(waterLevelPercentage < 0)
         {

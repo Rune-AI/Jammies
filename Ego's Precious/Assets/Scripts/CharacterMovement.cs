@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class CharacterMovement : MonoBehaviour
 {
+    [SerializeField] private bool visualize;
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private float downWardForce = 1;
@@ -35,8 +36,15 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
+
+        if(movementInput.x != 0 && movementInput.y != 0)
+        {
+            //Quaternion lookRotation = ;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(transform.parent.transform.TransformDirection(new Vector3(movementInput.x, 0, movementInput.y))), 10 * Time.deltaTime);
+
+            //transform.localRotation = Quaternion.Lerp(transform.localRotation, lookRotation, Time.fixedDeltaTime * 10);
+        }
 
         Vector2 localPosition2d = new Vector2(transform.localPosition.x, transform.localPosition.z);
         if (!IsPointInPolygon(localPosition2d, outerBoundsPolygon))
@@ -296,6 +304,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!visualize)
+        {
+            return;
+        }
+
         for(int i = 0; i < outerBoundsPolygon.Count - 1; ++i)
         {
             Vector3 p1 = new Vector3(outerBoundsPolygon[i].x, transform.localPosition.y, outerBoundsPolygon[i].y);
