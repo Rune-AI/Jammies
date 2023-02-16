@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class BoatWaterLevel : MonoBehaviour
 {
     [SerializeField] private GameObject loseScreen;
-    [SerializeField] private int waterLevelRisingTreshold = 2;
+    [SerializeField] private int sinkingTreshold = 1;
     [SerializeField] private float waterRiseSpeed = 0.05f;
     [SerializeField] private float minDepthBeforeSubmerged = 1;
     [SerializeField] private float maxDepthBeforeSubmerged = 10;
@@ -40,7 +40,7 @@ public class BoatWaterLevel : MonoBehaviour
     {
         holeCount = HoleAndStickerManager.instance.GetActiveHoleCount();
 
-        waterLevelPercentage += (holeCount - (waterLevelRisingTreshold - 1)) * Time.deltaTime * waterRiseSpeed;
+        waterLevelPercentage += (holeCount - (sinkingTreshold - 0.5f)) * Time.deltaTime * waterRiseSpeed;
 
         if(waterLevelPercentage > 1)
         {

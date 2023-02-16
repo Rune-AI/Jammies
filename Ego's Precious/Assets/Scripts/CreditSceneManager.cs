@@ -10,7 +10,7 @@ public class CreditSceneManager : MonoBehaviour
     
     private void OnEnable()
     {
-        StartCoroutine(StartCredits(5));
+        StartCoroutine(StartCredits(2));
     }
     public IEnumerator StartCredits(float t)
     {

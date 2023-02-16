@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/FinalScenes/StartScreen.unity
     guid: 0d298a8afc3b9ae4ca6dbdd3f6796df8
   - enabled: 1
-    path: Assets/Scenes/FinalScenes/hexagonMapTest.unity
-    guid: 2da0c735820080f4b91e178374029742
+    path: Assets/Scenes/GAMELEVEL_MEMORY.unity
+    guid: 2f24ad2ec3d5c8144bad779946049801
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fda69f7aa6b2a66488a37053495824dc, type: 2}

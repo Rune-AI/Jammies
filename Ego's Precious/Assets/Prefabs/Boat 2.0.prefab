@@ -632,6 +632,7 @@ MonoBehaviour:
   - {x: 0.332, y: 1.254}
   - {x: 0.537, y: -0.006}
   - {x: 0.345, y: -1.266}
+  cameraGameObject: {fileID: 0}
   charMesh: {fileID: 5744319509431216116}
 --- !u!114 &312466584015505954
 MonoBehaviour:
@@ -1092,7 +1093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loseScreen: {fileID: 0}
-  waterLevelRisingTreshold: 2
+  sinkingTreshold: 1
   waterRiseSpeed: 0.05
   minDepthBeforeSubmerged: 1
   maxDepthBeforeSubmerged: 10
@@ -1109,7 +1110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b6ff6a70b000e4c9d5f04d2e2d73d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winSceneName: Credits
+  creditSceneManager: {fileID: 0}
   moveSpeed: -5
   rotationSpeed: 20
   tiltedMoveSpeed: 10

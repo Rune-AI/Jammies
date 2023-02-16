@@ -68,18 +68,15 @@ public class HoleAndStickerManager : MonoBehaviour
     {
         foreach (var hole in holes)
         {
+            bool active = true;
             foreach (var sticker in stickers)
             {
                 if (checkIfStickerOverHole(sticker, hole))
                 {
-                    hole.SetActive(false);
-                }
-                else
-                {
-                    hole.SetActive(true);
-                }
-                    
+                    active = false;
+                }                    
             }
+            hole.SetActive(active);
             if (stickers.Count == 0)
             {
                 hole.SetActive(true);

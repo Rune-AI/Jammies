@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+//using System.Numerics;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,8 @@ public class CharacterMovement : MonoBehaviour
     //[SerializeField] private List<BoxCollider> boatColliders;
     [SerializeField] private List<Vector2> outerBoundsPolygon;
     [SerializeField] private List<Vector2> innerBoundsPolygon;
+
+    [SerializeField] private GameObject cameraGameObject;
 
     //private CharacterController characterController;
 
@@ -32,6 +35,12 @@ public class CharacterMovement : MonoBehaviour
     private void Awake()
     {
         animator = charMesh.GetComponent<Animator>();
+
+        if (!cameraGameObject)
+        {
+            Debug.LogError("no camera assigned");
+        }
+
         //boat = transform.parent.gameObject;
 
         //ownRigidbody = GetComponent<Rigidbody>();
@@ -46,13 +55,25 @@ public class CharacterMovement : MonoBehaviour
         else
             animator.SetBool("isMoving", false);
 
+        
+        movementInput.Normalize();
+        //movementInput = Quaternion.Euler(transform.parent.transform.eulerAngles) * movementInput;
+
+        //movementInput = transform.parent.transform.InverseTransformVector(movementInput);
+
+        //movementInput.Normalize();
+
+        //movementInput = transform.parent.transform.TransformVector(movementInput);
+
+        //movementInput.Normalize();
+
         transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
 
         if(movementInput.x != 0 || movementInput.y != 0)
         {
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(movementInput.x, 0, movementInput.y));
-            transform.localRotation = lookRotation;
-            //transform.localRotation = Quaternion.RotateTowards(transform.localRotation, lookRotation, rotateSpeed * Time.deltaTime);
+            //transform.localRotation = lookRotation;
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, lookRotation, rotateSpeed * Time.deltaTime);
 
             //transform.localRotation = Quaternion.Lerp(transform.localRotation, lookRotation, Time.fixedDeltaTime * 10);
         }
@@ -311,6 +332,10 @@ public class CharacterMovement : MonoBehaviour
     public void OnMove(InputValue value)
     {
         movementInput = value.Get<Vector2>();
+
+        //flip is temp solution, ideally it would depend on camera rotation
+        //movementInput.x = -value.Get<Vector2>().y;
+        //movementInput.y = value.Get<Vector2>().x;
     }
 
     private void OnDrawGizmos()
