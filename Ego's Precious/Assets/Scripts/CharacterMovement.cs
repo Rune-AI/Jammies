@@ -67,20 +67,35 @@ public class CharacterMovement : MonoBehaviour
 
         //movementInput.Normalize();
 
-        transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
-
-        if(movementInput.x != 0 || movementInput.y != 0)
+        if (movementInput.x != 0 || movementInput.y != 0)
         {
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(movementInput.x, 0, movementInput.y));
             //transform.localRotation = lookRotation;
             transform.localRotation = Quaternion.RotateTowards(transform.localRotation, lookRotation, rotateSpeed * Time.deltaTime);
 
             //transform.localRotation = Quaternion.Lerp(transform.localRotation, lookRotation, Time.fixedDeltaTime * 10);
+
+            //this fxes a bug, no idea why
+            if (movementInput.x == 0)
+            {
+                movementInput.x = 0.0001f;
+            }
+            if (movementInput.y == 0)
+            {
+                movementInput.y = 0.0001f;
+            }
         }
+        
+
+        transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
+
+        
 
         Vector2 localPosition2d = new Vector2(transform.localPosition.x, transform.localPosition.z);
         if (!IsPointInPolygon(localPosition2d, outerBoundsPolygon))
         {
+            //Debug.Log("outside");
+
             float closestDistance = float.MaxValue;
             Vector2 closestProjPoint = Vector2.zero;
 
@@ -155,178 +170,7 @@ public class CharacterMovement : MonoBehaviour
             transform.localPosition = newPos;
         }
 
-
-
-        //Vector2 p1p2 = closePoint2 - closePoint1;
-        //Vector2 perpendicular = new Vector2(p1p2.y, -p1p2.x);
-        //perpendicular.Normalize();
-        //perpendicular *= 100;
-
-        //Vector2 newPos = localPosition2d + perpendicular;
-
-        //float l1 = 0;
-        //float l2 = 0;
-
-        //if (IntersectLineSegments(closePoint1, closePoint2, localPosition2d, newPos, ref l1, ref l2, 0.0001f))
-        //{
-        //    Vector3 newLocalPosV3 = new Vector3(l1, transform.localPosition.y, l2);
-        //    transform.localPosition = newLocalPosV3;
-        //}
-        //else
-        //{
-        //    newPos = localPosition2d - perpendicular;
-
-        //    IntersectLineSegments(closePoint1, closePoint2, localPosition2d, newPos, ref l1, ref l2, 0.0001f);
-
-        //    Vector3 newLocalPosV3 = new Vector3(l1, transform.localPosition.y, l2);
-        //    transform.localPosition = newLocalPosV3;
-        //}
-
-        //nextMoveVector = new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.fixedDeltaTime;
-        //Vector3 newPosition = transform.localPosition + nextMoveVector * 10;
-
-        //bool colliding = false;
-        //foreach (BoxCollider collider in boatColliders)
-        //{
-        //    if (newPosition.x < collider.center.x + collider.size.x / 2
-        //        && newPosition.x > collider.center.x - collider.size.x / 2
-        //        && newPosition.y < collider.center.y + collider.size.y / 2
-        //        && newPosition.y > collider.center.y - collider.size.y / 2
-        //        && newPosition.z < collider.center.z + collider.size.z / 2
-        //        && newPosition.z > collider.center.z - collider.size.z / 2)
-
-        //    {
-        //        colliding = true;
-        //        break;
-        //    }
-        //}
-
-        //if (!colliding)
-        //{
-        //    transform.localPosition += nextMoveVector;
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //Vector3 moveVector = transform.parent.transform.TransformVector(new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime);
-        //characterController.Move(moveVector);
-
-        //transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.fixedDeltaTime;
-
-        //BoxCollider hitCollider = null;
-        //foreach (BoxCollider collider in boatColliders)
-        //{
-        //    if (transform.localPosition.x < collider.center.x + collider.size.x / 2
-        //        && transform.localPosition.x > collider.center.x - collider.size.x / 2
-        //        && transform.localPosition.y < collider.center.y + collider.size.y / 2
-        //        && transform.localPosition.y > collider.center.y - collider.size.y / 2
-        //        && transform.localPosition.z < collider.center.z + collider.size.z / 2
-        //        && transform.localPosition.z > collider.center.z - collider.size.z / 2)
-
-        //    {
-        //        hitCollider = collider;
-        //        break;
-        //    }
-        //}
-
-        //if (hitCollider)
-        //{
-        //    Bounds bounds = new Bounds();
-        //    bounds.center = hitCollider.center;
-        //    bounds.size = hitCollider.size;
-
-        //    transform.localPosition = GetClosestPointOnBounds(bounds, transform.localPosition);
-        //}
-
-
-
-
-        //nextMoveVector = new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.fixedDeltaTime;
-        //nextMoveVector = transform.parent.transform.TransformDirection(nextMoveVector);
-        //Vector3 newPosition = transform.position + nextMoveVector * 10;
-
-        //bool colliding = false;
-        //foreach (Collider collider in boatColliders)
-        //{
-        //    if (collider.bounds.Contains(newPosition))
-        //    {
-        //        colliding = true;
-        //        break;
-        //    }
-        //}
-
-        //if (!colliding)
-        //{
-        //    transform.position += nextMoveVector;
-        //}
-
-
-        //nextMoveVector = new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.fixedDeltaTime;
-        //Vector3 newPosition = transform.localPosition + nextMoveVector * 10;
-
-        //newPosition = transform.parent.transform.TransformPoint(newPosition);
-
-        //bool colliding = false;
-        //foreach (Collider collider in boatColliders)
-        //{
-        //    if (collider.bounds.Contains(newPosition))
-        //    {
-        //        colliding = true;
-        //        break;
-        //    }
-        //}
-
-        //if (!colliding)
-        //{
-        //    transform.localPosition += nextMoveVector;
-        //}
-
-        //transform.Translate(new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime);
-
-        //if (newPosition.x < maxMoveLimit.x && newPosition.x > minMoveLimit.x && newPosition.y < maxMoveLimit.y && newPosition.y > minMoveLimit.y)
-        //{
-        //    transform.Translate(nextMoveVector);
-        //}
-
-        //ownRigidbody.velocity = Vector3.zero;
-
-        //nextMoveVector = new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime;
-
-        //transform.Translate(nextMoveVector);
-
-        //transform.Translate(new Vector3(movementInput.x, 0, movementInput.y) * moveSpeed * Time.deltaTime);
-
         rigidBody.AddForceAtPosition(Physics.gravity * downWardForce, transform.position, ForceMode.Acceleration);
-
-        //Vector3 moveDirection = boat.transform.TransformDirection(new Vector3(movementInput.x, 0, movementInput.y));
-        //moveDirection.y = 0;
-        //moveDirection.Normalize();
-        //rigidBody.AddForce(moveDirection * moveSpeed * Time.deltaTime);
-        //rigidBody.AddForce(new Vector3(0,-downWardForce,0) * Time.deltaTime);
     }
 
     public void OnMove(InputValue value)
