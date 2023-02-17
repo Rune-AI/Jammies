@@ -100,8 +100,8 @@ public class CharacterMovement : MonoBehaviour
                 }
             }
 
-            Vector2 p3 = innerBoundsPolygon[innerBoundsPolygon.Count - 1];
-            Vector2 p4 = innerBoundsPolygon[0];
+            Vector2 p3 = outerBoundsPolygon[outerBoundsPolygon.Count - 1];
+            Vector2 p4 = outerBoundsPolygon[0];
 
             //calc proj point
             Vector2 projPoint2 = GetProjectedPointOnSegment(p3, p4, localPosition2d);
