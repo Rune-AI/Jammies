@@ -70,20 +70,7 @@ public class CharacterMovement : MonoBehaviour
         if (movementInput.x != 0 || movementInput.y != 0)
         {
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(movementInput.x, 0, movementInput.y));
-            //transform.localRotation = lookRotation;
             transform.localRotation = Quaternion.RotateTowards(transform.localRotation, lookRotation, rotateSpeed * Time.deltaTime);
-
-            //transform.localRotation = Quaternion.Lerp(transform.localRotation, lookRotation, Time.fixedDeltaTime * 10);
-
-            //this fxes a bug, no idea why
-            if (movementInput.x == 0)
-            {
-                movementInput.x = 0.0001f;
-            }
-            if (movementInput.y == 0)
-            {
-                movementInput.y = 0.0001f;
-            }
         }
         
 
@@ -280,14 +267,15 @@ public class CharacterMovement : MonoBehaviour
         //    and count how often it hits any side of the polygon. 
         //    If the number of hits is even, it's outside of the polygon, if it's odd, it's inside.
         int numberOfIntersectionPoints = 0;
-        Vector2 p2 = new Vector2(xMax + 10.0f, p.y); // Horizontal line from point to point outside polygon (p2)
+        const float margin = 0.0001f; //specifically for this script, could cause bugs if used elsewhere
+        Vector2 p2 = new Vector2(xMax + 10.0f, p.y + margin); // Horizontal line from point to point outside polygon (p2)
 
         // Count the number of intersection points
         float lambda1 = 0;
         float lambda2 = 0;
         for (int i = 0; i < polygon.Count; ++i)
         {
-            if (IntersectLineSegments(polygon[i], polygon[(i + 1) % polygon.Count], p, p2, ref lambda1, ref lambda2, 0.00001f))
+            if (IntersectLineSegments(polygon[i], polygon[(i + 1) % polygon.Count], p, p2, ref lambda1, ref lambda2, 0.01f))
             {
                 if (lambda1 > 0 && lambda1 <= 1 && lambda2 > 0 && lambda2 <= 1)
                 {
@@ -361,7 +349,7 @@ public class CharacterMovement : MonoBehaviour
         Vector2 ap = p - a;
         Vector2 bp = p - b;
         // If not on same line, return false
-        if (Mathf.Abs(Vector3.Cross(ap, bp).z) > 0.001f)
+        if (Mathf.Abs(Vector3.Cross(ap, bp).z) > 0.01f)
         {
             return false;
         }
