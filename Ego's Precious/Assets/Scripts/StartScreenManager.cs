@@ -15,6 +15,5 @@ public class StartScreenManager : MonoBehaviour
         startScreen.SetActive(false);
         loadingScreen.SetActive(true);
         SceneManager.LoadScene(1);
-        
     }
 }

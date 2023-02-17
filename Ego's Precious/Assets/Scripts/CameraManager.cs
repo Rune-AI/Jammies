@@ -14,6 +14,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private List<float> CameraDistancePercentages;
     [SerializeField] private List<float> CameraZPoints;
 
+   
+
     private Vector3 direction;
 
     private void Start()
