@@ -189,6 +189,39 @@
                     "action": "PressedValidButton",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "411c81ab-a014-4786-8319-d18417759dd2",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PressedValidButton",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "986bd814-3021-4318-ba34-1fb3076e153d",
+                    "path": "<Gamepad>/leftStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PressedValidButton",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "f2ea9ce5-92c9-483d-a459-8aa7676b7fc3",
+                    "path": "<Gamepad>/leftStick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PressedValidButton",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

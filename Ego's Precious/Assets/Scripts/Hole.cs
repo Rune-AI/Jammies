@@ -27,32 +27,38 @@ public class Hole : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        if (IsHoleUnderWater())
-        {
-            Debug.Log("Water Activated");
-            waterEffect.Play();
-            //waterParticles.Play();
-        }
-        else
-        {
-            waterEffect.Stop();
-            //waterParticles.Stop();
-        }
+        waterEffect.Play();
+        //if (IsHoleUnderWater())
+        //{
+        //    Debug.Log("Water Activated");
+        //    waterEffect.Play();
+        //    //waterParticles.Play();
+        //}
+        //else
+        //{
+        //    waterEffect.Stop();
+        //    //waterParticles.Stop();
+        //}
     }
 
     private void OnEnable()
     {
-        if (IsHoleUnderWater())
-        {
-            Debug.Log("Water Activated");
-            waterEffect.Play();
-            //waterParticles.Play();
-        }
-        else
-        {
-            waterEffect.Stop();
-            //waterParticles.Stop();
-        }
+        waterEffect.Play();
+        //if (IsHoleUnderWater())
+        //{
+        //    Debug.Log("Water Activated");
+        //    waterEffect.Play();
+        //    //waterParticles.Play();
+        //}
+        //else
+        //{
+        //    waterEffect.Stop();
+        //    //waterParticles.Stop();
+        //}
+    }
+    private void OnDisable()
+    {
+        waterEffect.Stop();
     }
 
 

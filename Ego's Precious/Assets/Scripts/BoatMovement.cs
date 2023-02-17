@@ -129,7 +129,7 @@ public class BoatMovement : MonoBehaviour
             movementInput.x = -Mathf.Sqrt(Mathf.Abs(movementInput.x));
         }
 
-        if (Mathf.Abs(movementInput.x) < 0.01f)
+        if (Mathf.Abs(movementInput.x) < 0.02f)
         {
             movementInput.x = 0;
         }

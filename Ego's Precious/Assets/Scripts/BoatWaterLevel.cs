@@ -40,7 +40,14 @@ public class BoatWaterLevel : MonoBehaviour
     {
         holeCount = HoleAndStickerManager.instance.GetActiveHoleCount();
 
-        waterLevelPercentage += (holeCount - (sinkingTreshold - 0.5f)) * Time.deltaTime * waterRiseSpeed;
+        if(holeCount == 0) 
+        {
+            waterLevelPercentage += (holeCount - (sinkingTreshold - 0.5f)) * Time.deltaTime * waterRiseSpeed;
+        }
+        else 
+        {
+            waterLevelPercentage += (holeCount - (sinkingTreshold - 0.5f)) * Time.deltaTime * waterRiseSpeed * 3;
+        }
 
         if(waterLevelPercentage > 1)
         {

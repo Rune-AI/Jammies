@@ -686,8 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e963e4405afdaa4fbdcc006cbc5e3d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScreen: {fileID: 0}
-  buttonPressesNeeded: 30
+  buttonPressesNeeded: 20
 --- !u!1 &317960923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,11 +1063,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b223ba2e7d821d4796c41d161e5208e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visualize: 0
   rigidBody: {fileID: 1202860667}
   moveSpeed: 1
+  rotateSpeed: 1
   downWardForce: 2
   outerBoundsPolygon: []
   innerBoundsPolygon: []
+  cameraGameObject: {fileID: 0}
+  charMesh: {fileID: 0}
 --- !u!114 &673428692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1527,8 +1530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f87e132c6365664fa77dc6637bdc946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endScreen: {fileID: 170462104}
-  waterLevelRisingTreshold: 2
+  loseScreen: {fileID: 0}
+  sinkingTreshold: 1
   waterRiseSpeed: 0.05
   minDepthBeforeSubmerged: 1
   maxDepthBeforeSubmerged: 10
@@ -1582,7 +1585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b6ff6a70b000e4c9d5f04d2e2d73d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winScreen: {fileID: 0}
+  creditSceneManager: {fileID: 0}
   moveSpeed: 0
   rotationSpeed: 20
   tiltedMoveSpeed: 10

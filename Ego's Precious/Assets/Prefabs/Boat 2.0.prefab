@@ -583,7 +583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312466584015505983}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.044, y: 0, z: 2.182}
+  m_LocalPosition: {x: -0.044, y: 0, z: 1.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -603,22 +603,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b223ba2e7d821d4796c41d161e5208e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualize: 0
+  visualize: 1
   rigidBody: {fileID: 6743590462165905097}
-  moveSpeed: 1
-  rotateSpeed: 1
-  downWardForce: 0
+  moveSpeed: 1.5
+  rotateSpeed: 720
+  downWardForce: 1
   outerBoundsPolygon:
-  - {x: 0.11, y: -2.79}
+  - {x: 0.11, y: -2.795}
   - {x: -0.07, y: -2.79}
   - {x: -0.88, y: -1.67}
-  - {x: -1.24, y: -0.7}
+  - {x: -1.245, y: -0.7}
   - {x: -1.24, y: 0.65}
   - {x: -0.88, y: 1.63}
-  - {x: -0.044, y: 2.757}
-  - {x: 0.096, y: 2.757}
+  - {x: -0.044, y: 2.75}
+  - {x: 0.096, y: 2.7}
   - {x: 0.85, y: 1.67}
-  - {x: 1.26, y: 0.67}
+  - {x: 1.265, y: 0.67}
   - {x: 1.26, y: -0.68}
   - {x: 0.86, y: -1.73}
   innerBoundsPolygon:
@@ -646,7 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2c3847134037d49844ccd8a4d29d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDistance: 100
+  interactionDistance: 2.5
   buttonPromptPrefab: {fileID: 5119865803729445028, guid: 2c93f5c30bb61c14f9e9149758ecc05f, type: 3}
   stickerHoldingPrefab: {fileID: 4311692321122040540, guid: bb0d0263354a53c4d980faa3632128bb, type: 3}
 --- !u!114 &312466584015505956
@@ -1049,7 +1049,7 @@ MeshCollider:
   m_GameObject: {fileID: 2097161706911785761}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -1094,10 +1094,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loseScreen: {fileID: 0}
   sinkingTreshold: 1
-  waterRiseSpeed: 0.05
+  waterRiseSpeed: 0.025
   minDepthBeforeSubmerged: 1
-  maxDepthBeforeSubmerged: 10
-  holeCount: 3
+  maxDepthBeforeSubmerged: 15
+  holeCount: 0
 --- !u!114 &2047197092116226041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1111,10 +1111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditSceneManager: {fileID: 0}
-  moveSpeed: -5
-  rotationSpeed: 20
-  tiltedMoveSpeed: 10
-  sidePushSpeed: 2
+  moveSpeed: -1
+  rotationSpeed: 30
+  tiltedMoveSpeed: 15
+  sidePushSpeed: 0.5
 --- !u!114 &4822109795523664659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1166,7 +1166,7 @@ MeshCollider:
   m_GameObject: {fileID: 4579805035347655415}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
