@@ -27,7 +27,7 @@ public class RiverNodeManager : MonoBehaviour
             return;
         }
 
-        riverNodes = new List<RiverNode>(FindObjectsOfType<RiverNode>());
+        //riverNodes = new List<RiverNode>(FindObjectsOfType<RiverNode>());
     }
 
     private void OnDrawGizmos()

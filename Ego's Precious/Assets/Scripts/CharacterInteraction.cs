@@ -89,7 +89,10 @@ public class CharacterInteraction : MonoBehaviour
 
         buttonPrompt.transform.position = gameObject.transform.position + new Vector3(0, 1, 0) + direction.normalized;
         buttonPrompt.transform.LookAt(Camera.main.transform.position);
-        buttonPrompt.SetActive(true);
+        if (!buttonPrompt.activeInHierarchy)
+        {
+            buttonPrompt.SetActive(true);
+        }
     }
 
     private GameObject FindNearestHole()

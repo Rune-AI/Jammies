@@ -109,7 +109,7 @@ public class BoatMovement : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (endGame)
         {
